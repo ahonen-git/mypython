@@ -5,13 +5,18 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
 import netCDF4
 
-def plot2d(var,vmin=0.0,vmax=1.0,lon_mn=0.0,lon_mx=360.0,lat_mn=-90.0,lat_mx=90.0):
+def plot2d(var,vmin=np.nan,vmax=np.nan,lon_mn=0.0,lon_mx=360.0,lat_mn=-90.0,lat_mx=90.0):
   src_nc00=netCDF4.Dataset('/Users/misumi/pop_data/gx1v6.concat.nc','r')
   tlon=src_nc00.variables['tlon'][:]
   tlat=src_nc00.variables['tlat'][:]
   vlon=src_nc00.variables['vlon'][:]
   vlat=src_nc00.variables['vlat'][:]
   src_nc00.close()
+
+  if np.isnan(vmin):
+    vmin=ma.min(var)
+  if np.isnan(vmax):
+    vmax=ma.max(var)
   
   var2=ma.concatenate((var,var),axis=1)
   
