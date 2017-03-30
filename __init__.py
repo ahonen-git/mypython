@@ -1,4 +1,4 @@
-from anim   import *
-from tool   import *
-from map    import *
-from netcdf import *
+import anim
+import tool
+import map
+import netcdf

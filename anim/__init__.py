@@ -1,1 +1,1 @@
-from . import anim
+import anim

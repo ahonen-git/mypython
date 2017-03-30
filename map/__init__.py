@@ -1,1 +1,1 @@
-from . import gx1v6
+import gx1v6

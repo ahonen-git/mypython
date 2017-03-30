@@ -2,9 +2,21 @@
 This is a python toolbox written by myself.
 
 ## How to use and develop
-### In mypython
-```python:hoge.txt
-[ mypython/tool/anim.py ]
+### To develop
+```
+[ mypython/__init__.py ]
+...
+import tool
+import map
+...
+```
+```
+[ mypython/tool/__init__.py]
+import calc_iso_surf
+import misc
+```
+```
+[ mypython/tool/misc.py ]
 import datetime
 import numpy as np
 def oct2date(oct,t0=datetime.date(1,1,1)):
@@ -18,19 +30,11 @@ def oct2date(oct,t0=datetime.date(1,1,1)):
 ### To use
 ```
 [ hoge.py ]
+import sys
+sys.path.append('/Users/misumi')
 import mypython
-octime=mypython.misc.oct2date(oct)
-```
-### To refer help
-```
-[ hoge.py ]
-import mypython
-help(mypython.misc.oct2date)
-```
-return is something like
-```
-Help on function oct2date in module mypython.tool.misc:
-
-oct2date(oct, t0=datetime.date(1, 1, 1))
-    function to convert octime (in list) to datetime object
+# use
+octime=mypython.tool.misc.oct2date(oct)
+# see help
+help(mypython.tool.misc.oct2date)
 ```

@@ -1,2 +1,3 @@
-from . import calc_iso_surf
-from . import misc
+import calc_iso_surf
+import misc
+import netcdf
