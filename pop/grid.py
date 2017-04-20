@@ -17,5 +17,9 @@ class pop_grid:
     self.z_t_150m=src_nc00.variables['z_t_150m'][:]
     self.dz=src_nc00.variables['dz'][:]
     self.region_mask=src_nc00.variables['REGION_MASK'][:]
+    self.tlon_conc=src_nc01.variables['tlon'][:]
+    self.tlat_conc=src_nc01.variables['tlat'][:]
+    self.vlon_conc=src_nc01.variables['vlon'][:]
+    self.vlat_conc=src_nc01.variables['vlat'][:]
     src_nc00.close()
     src_nc01.close()
