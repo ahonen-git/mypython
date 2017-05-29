@@ -20,3 +20,31 @@ def arglatlon(latP,lonP,lat2d,lon2d):
   iind=ind1d%nx
   a=np.array([jind,iind])
   return a
+
+def z3d_cal(grd,zeta=0.0,Cpos='rho'):
+
+  if Cpos=='rho':
+    Cs=grd.vgrid.Cs_r
+    s =grd.vgrid.s_rho
+  elif Cpos=='w':
+    Cs=grd.vgrid.Cs_w
+    s =grd.vgrid.s_w
+
+  h    =grd.vgrid.z_r.h
+  hc   =grd.vgrid.z_r.hc
+
+  ns=len(s)
+  ny,nx,=h.shape
+    
+  s_3d=np.zeros((ns,ny,nx))
+  s_3d=s_3d.swapaxes(0,2)+s
+  s_3d=s_3d.swapaxes(0,2)
+
+  Cs_3d=np.zeros((ns,ny,nx))
+  Cs_3d=Cs_3d.swapaxes(0,2)+Cs
+  Cs_3d=Cs_3d.swapaxes(0,2)
+  
+  s=(hc*s_3d+h*Cs_3d)/(hc+h)
+    
+  z3d=zeta+(zeta+h)*s
+  return z3d
