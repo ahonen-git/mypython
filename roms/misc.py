@@ -29,3 +29,28 @@ def zCal(grd,pos):
     m=ary+m
     z=ma.masked_where(m==0,z)
     return z
+
+
+def uv_shift(uvar,vvar):
+    """
+    u,v=uv_shift(u,v)
+    lon_u,lat_v=uv_shift(lon_u,lat_v)
+    """
+    if uvar.ndim == vvar.ndim:
+        d=uvar.ndim
+        uvar=0.5*(uvar+np.roll(uvar,1,axis=d-1))
+        vvar=0.5*(vvar+np.roll(vvar,1,axis=d-2))
+        if   d==2:
+            uvar=uvar[1:-1,1:]
+            vvar=vvar[1:,1:-1]
+        elif d==3:
+            uvar=uvar[:,1:-1,1:]
+            vvar=vvar[:,1:,1:-1]
+        elif d==4:
+            uvar=uvar[:,:,1:-1,1:]
+            vvar=vvar[:,:,1:,1:-1]
+        else:
+            print 'Error ndim must be 2, 3 or 4.'
+    else:
+        print 'Error'
+    return uvar,vvar
