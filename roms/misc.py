@@ -54,3 +54,12 @@ def uv_shift(uvar,vvar):
     else:
         print 'Error'
     return uvar,vvar
+
+def grd_border(grd):
+    lon_mn=np.min(grd.hgrid.lon_vert)
+    lon_mx=np.max(grd.hgrid.lon_vert)
+    lat_mn=np.min(grd.hgrid.lat_vert)
+    lat_mx=np.max(grd.hgrid.lat_vert)
+    return lon_mn,lon_mx,lat_mn,lat_mx
+
+
