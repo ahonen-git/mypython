@@ -10,7 +10,6 @@ c
 Cf2py intent(out) var2d
 Cf2py intent(in)  var3d,iso3d,isoval,miss,nz,ny,nx
 
-      write(*,*) isoval
       do j=1,ny
         do i=1,nx
           var2d(j,i)=miss
