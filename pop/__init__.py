@@ -1,3 +1,3 @@
-import dims
-import map
-import grid
+from . import dims
+from . import map
+from . import grid

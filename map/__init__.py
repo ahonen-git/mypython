@@ -1,1 +1,1 @@
-import panel
+from . import panel

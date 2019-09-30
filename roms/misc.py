@@ -50,9 +50,9 @@ def uv_shift(uvar,vvar):
             uvar=uvar[:,:,1:-1,1:]
             vvar=vvar[:,:,1:,1:-1]
         else:
-            print 'Error ndim must be 2, 3 or 4.'
+            print('Error ndim must be 2, 3 or 4.')
     else:
-        print 'Error'
+        print('Error')
     return uvar,vvar
 
 def grd_border(grd):

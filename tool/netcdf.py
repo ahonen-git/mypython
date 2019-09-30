@@ -4,7 +4,7 @@ import netCDF4
 def inq_file(fname):
   src_nc00=netCDF4.Dataset(fname,'r')
   for v in src_nc00.variables.keys():
-    print v,src_nc00.variables[v][:].shape
+    print(v,src_nc00.variables[v][:].shape)
   src_nc00.close()
 
 def dim_get(fname):
