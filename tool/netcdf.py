@@ -1,4 +1,5 @@
 import netCDF4
+import os
 
 #-- file name --
 def inq_file(fname):
@@ -16,14 +17,16 @@ def dim_get(fname):
   return dims 
 
 def nc_write(fname,vars,dtype='f4',fv=1.e37,units='n/a',nbname='test',wrkdir='test'):
+    if os.path.exists(fname):
+        os.remove(fname)
     fo=netCDF4.Dataset(fname,'w')
     fo.nbname=nbname
     fo.wrkdir=wrkdir
     
-    for n,d in zip(range(vars[vars.keys()[0]].ndim),vars[vars.keys()[0]].shape):
+    for n,d in zip(range(vars[list(vars.keys())[0]].ndim),vars[list(vars.keys())[0]].shape):
         fo.createDimension('dim'+str(n),d)
     for v in sorted(vars.keys()):
-        vo=fo.createVariable(v,dtype,['dim'+str(n) for n in range(vars[vars.keys()[0]].ndim)],fill_value=fv)
+        vo=fo.createVariable(v,dtype,['dim'+str(n) for n in range(vars[list(vars.keys())[0]].ndim)],fill_value=fv)
         vo[:]=vars[v][:]
         vo.units=units
     fo.close()
