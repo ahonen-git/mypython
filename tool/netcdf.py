@@ -16,17 +16,26 @@ def dim_get(fname):
     dims.update({x.name:x.size})
   return dims 
 
-def nc_write(fname,vars,dtype='f4',fv=1.e37,units='n/a',nbname='test',wrkdir='test'):
+def nc_write(fname,vars,dtype='f4',fv=1.e37,udic='n/a',nbname='test',wrkdir='test'):
     if os.path.exists(fname):
         os.remove(fname)
     fo=netCDF4.Dataset(fname,'w')
     fo.nbname=nbname
     fo.wrkdir=wrkdir
-    
-    for n,d in zip(range(vars[list(vars.keys())[0]].ndim),vars[list(vars.keys())[0]].shape):
-        fo.createDimension('dim'+str(n),d)
-    for v in sorted(vars.keys()):
-        vo=fo.createVariable(v,dtype,['dim'+str(n) for n in range(vars[list(vars.keys())[0]].ndim)],fill_value=fv)
-        vo[:]=vars[v][:]
-        vo.units=units
+
+    dcnt=0
+    for vname in vars.keys():
+        dlist=[]
+        for n in range(vars[vname].ndim):
+            fo.createDimension("dim{0}".format(dcnt),vars[vname].shape[n])
+            dlist.append("dim{0}".format(dcnt))
+            dcnt+=1
+
+        vo=fo.createVariable(vname,vars[vname].dtype,dlist,fill_value=fv)
+        vo[:]=vars[vname][:]
+        try:
+            vo.units=udic[vname]
+        except:
+            pass
+
     fo.close()
